@@ -1,49 +1,28 @@
-import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
-import Image from "next/image"
-import Link from 'next/link';
-import { GetServerSideProps, NextPage } from 'next';
-import { GetData, Recipes } from "../../types"
+import style from '@/styles/Home.module.css'
+import RandomRecipe from '@/components/home-components/RandomRecipe'
+import { GetData, Recipes } from "types"
 
 
 
-
-export default function Home({data}: {data:GetData}) {
+export default function Home({data}: {data: GetData}) {
 
   return (
     <>
-     { /*
-      <main className={styles.main}>
-       <div>
-        <h3>Recipe No.1</h3>
-        <h2>{nameOne}</h2>
-        <Image 
-          src={imageOne}
-          alt=""
-          width={200}
-          height={133}
-          />
-        <div dangerouslySetInnerHTML={{ __html: dietsOne }}></div>
-       </div>
-  </main>*/}
-  {data.recipes.map((recipe: Recipes) => {
-    return <div key = {recipe.id}>{recipe.title}
-    <Image 
-          src={recipe.image}
-          alt={recipe.title}
-          width={200}
-          height={133}
-          />
-    </div>
-  })}
+      <div className={style["top-left-container"]}>
+        <RandomRecipe data = {data} ></RandomRecipe>
+      </div>
+      <main className={style.main}>
+      </main>
     </>
   )
 }
 
+
+
+
 export async function getServerSideProps(){
 
-
-  const response = await fetch( "https://api.spoonacular.com/recipes/random?number=3",
+  const response = await fetch( "https://api.spoonacular.com/recipes/random?number=2",
   {
       method: 'GET',
       headers: {
@@ -53,4 +32,3 @@ export async function getServerSideProps(){
   const data: GetData = await response.json();
   return{ props: { data } }
 }
-

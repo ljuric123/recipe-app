@@ -1,0 +1,15 @@
+.top-flex-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.bottom-flex-container{
+    display:flex;
+    flex-direction: row;
+    padding: 1em;
+}
+.flex-item-text{
+    margin-left: 1em;
+
+}
